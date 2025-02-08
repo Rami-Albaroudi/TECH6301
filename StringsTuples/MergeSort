@@ -1,0 +1,31 @@
+def merge_sort(list):
+
+    if len(list) <= 1:
+        return list
+
+    mid = len(list) // 2
+    first_half = merge_sort(list[:mid])
+    second_half = merge_sort(list[mid:])
+
+    return merge(first_half, second_half)
+
+def merge(first_half, second_half):
+    result = []  
+    x = y = 0  
+
+    while x < len(first_half) and y < len(second_half):
+        if first_half[x] <= second_half[y]:
+            result.append(first_half[x])
+            x += 1
+        else:
+            result.append(second_half[y])
+            y += 1
+
+    result.extend(first_half[x:])
+    result.extend(second_half[y:])
+
+    return result
+
+list = [6, 3, 8, 5, 2, 7, 4, 1]
+sorted_list = merge_sort(list)
+print(sorted_list)
